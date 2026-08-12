@@ -1,0 +1,293 @@
+<template>
+
+    <lightning-card
+        title="Apex Code Enhancer"
+        icon-name="utility:code_playground">
+
+        <div class="container">
+
+            <!-- Enhancement Options -->
+
+            <div class="section">
+
+                <h2 class="section-title">
+                    Enhancement Options
+                </h2>
+
+                <div class="options">
+
+                    <lightning-input
+                        type="checkbox"
+                        label="Bulkification"
+                        checked>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="checkbox"
+                        label="SOQL Optimization"
+                        checked>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="checkbox"
+                        label="Governor Limits"
+                        checked>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="checkbox"
+                        label="Security"
+                        checked>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="checkbox"
+                        label="Exception Handling"
+                        checked>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="checkbox"
+                        label="Code Quality"
+                        checked>
+                    </lightning-input>
+
+                </div>
+
+            </div>
+
+            <!-- Apex Input -->
+
+            <div class="section">
+
+                <h2 class="section-title">
+                    Apex Class
+                </h2>
+
+                <textarea
+                    class="code-editor"
+                    value={apexCode}
+                    onchange={handleCodeChange}
+                    placeholder="Paste your Apex class here..."
+                    spellcheck="false">
+                </textarea>
+
+            </div>
+
+            <!-- Action -->
+
+            <div class="actions">
+
+                <lightning-button
+                    label="Clear"
+                    onclick={handleClear}>
+                </lightning-button>
+
+                <lightning-button
+                    label="Enhance Apex"
+                    variant="brand"
+                    icon-name="utility:sparkles"
+                    onclick={handleEnhance}
+                    disabled={isLoading}>
+                </lightning-button>
+
+            </div>
+
+            <!-- Spinner -->
+
+            <template if:true={isLoading}>
+
+                <div class="loading">
+
+                    <lightning-spinner
+                        alternative-text="Enhancing Apex code..."
+                        size="medium">
+                    </lightning-spinner>
+
+                    <p>
+                        Analyzing and improving your Apex code...
+                    </p>
+
+                </div>
+
+            </template>
+
+            <!-- Results -->
+
+            <template if:true={hasResult}>
+
+                <div class="result-section">
+
+                    <div class="result-header">
+
+                        <h2>
+                            Enhanced Apex
+                        </h2>
+
+                        <lightning-button
+                            label="Copy Enhanced Code"
+                            icon-name="utility:copy"
+                            onclick={handleCopy}>
+                        </lightning-button>
+
+                    </div>
+
+                    <!-- Side by Side -->
+
+                    <div class="diff-container">
+
+                        <!-- Original -->
+
+                        <div class="code-panel">
+
+                            <div class="panel-header original">
+                                Original Apex
+                            </div>
+
+                            <div class="code-body">
+
+                                <template
+                                    for:each={originalLines}
+                                    for:item="line">
+
+                                    <div
+                                        key={line.id}
+                                        class={line.cssClass}>
+
+                                        <span class="line-number">
+                                            {line.lineNumber}
+                                        </span>
+
+                                        <span class="line-code">
+                                            {line.text}
+                                        </span>
+
+                                    </div>
+
+                                </template>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Enhanced -->
+
+                        <div class="code-panel">
+
+                            <div class="panel-header enhanced">
+                                Enhanced Apex
+                            </div>
+
+                            <div class="code-body">
+
+                                <template
+                                    for:each={enhancedLines}
+                                    for:item="line">
+
+                                    <div
+                                        key={line.id}
+                                        class={line.cssClass}>
+
+                                        <span class="line-number">
+                                            {line.lineNumber}
+                                        </span>
+
+                                        <span class="line-code">
+                                            {line.text}
+                                        </span>
+
+                                    </div>
+
+                                </template>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Summary -->
+
+                <div class="analysis-section">
+
+                    <h2>
+                        Enhancement Summary
+                    </h2>
+
+                    <p>
+                        {summary}
+                    </p>
+
+                </div>
+
+                <!-- Changes -->
+
+                <template if:true={hasChanges}>
+
+                    <div class="analysis-section">
+
+                        <h2>
+                            Changes Made
+                        </h2>
+
+                        <template
+                            for:each={changes}
+                            for:item="change">
+
+                            <div
+                                key={change.id}
+                                class="change-item">
+
+                                <span class="change-category">
+                                    {change.category}
+                                </span>
+
+                                <span>
+                                    {change.description}
+                                </span>
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+                </template>
+
+                <!-- Issues -->
+
+                <template if:true={hasIssues}>
+
+                    <div class="analysis-section">
+
+                        <h2>
+                            Developer Review Required
+                        </h2>
+
+                        <template
+                            for:each={issues}
+                            for:item="issue">
+
+                            <div
+                                key={issue.id}
+                                class="issue-item">
+
+                                ⚠ {issue.text}
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+                </template>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>
