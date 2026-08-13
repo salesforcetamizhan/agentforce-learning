@@ -1,0 +1,115 @@
+system:
+    instructions: "You are an AI Agent."
+    messages:
+        welcome: |
+            Hi, I'm an AI service assistant. How can I help you?
+        error: "Sorry, it looks like something has gone wrong."
+
+config:
+    agent_label: "TranscriptDetailsFetchAgent"
+    agent_template: "SvcCopilotTmpl__AgentforceServiceAgent"
+    developer_name: "TranscriptDetailsFetchAgent"
+    description: "Deliver personalized customer interactions with an autonomous AI agent. Agentforce Service Agent intelligently supports your customers with common inquiries and escalates complex issues."
+
+access:
+    default_agent_user: "account_creation@00dg500000adamk1129486269.ext"
+
+variables:
+    authenticationKey: mutable string
+        description: "Stores the authentication key that's used to generate the verification code."
+        visibility: "Internal"
+    customerId: mutable string
+        description: "Stores the Salesforce user ID or contact ID."
+        visibility: "Internal"
+    customerType: mutable string
+        description: "Stores the customer ID type, whether it's a Salesforce user or a contact."
+        visibility: "Internal"
+    isVerified: mutable boolean = False
+        label: "isVerified"
+        description: "Stores a boolean value that indicates whether the customer code is verified."
+        visibility: "Internal"
+    EndUserId: linked string
+        source: @MessagingSession.MessagingEndUserId
+        description: "This variable may also be referred to as MessagingEndUser Id"
+    RoutableId: linked string
+        source: @MessagingSession.Id
+        description: "This variable may also be referred to as MessagingSession Id"
+    ContactId: linked string
+        source: @MessagingEndUser.ContactId
+        description: "This variable may also be referred to as MessagingEndUser ContactId"
+    EndUserLanguage: linked string
+        source: @MessagingSession.EndUserLanguage
+        description: "This variable may also be referred to as MessagingSession EndUserLanguage"
+    ChannelType: linked string
+        source: @MessagingSession.ChannelType
+        description: "This variable may also be referred to as MessagingSession ChannelType"
+    VerifiedCustomerId: mutable string
+        description: "This variable may also be referred to as VerifiedCustomerId"
+        visibility: "Internal"
+    emailCaseId: mutable string
+        description: "Stores the Salesforce Case ID created by an inbound email."
+        visibility: "External"
+    endUserEmail: mutable string
+        description: "Stores email address of the end user who sent the inbound email."
+        visibility: "External"
+    endUserContactId: mutable string
+        description: "Stores the Salesforce Contact ID associated with the end user who sent the inbound email."
+        visibility: "External"
+
+language:
+    additional_locales: "en_GB"
+    default_locale: "en_US"
+    all_additional_locales: False
+
+knowledge:
+    rag_feature_config_id: ""
+    citations_url: ""
+    citations_enabled: False
+
+start_agent agent_router:
+    label: "Agent Router"
+    description: "Welcome the user and determine the appropriate subagent based on user input"
+    model_config:
+        model: "model://sfdc_ai__DefaultEinsteinHyperClassifier"
+    reasoning:
+        instructions: ->
+            | Select the best tool to call based on conversation history and user's intent.
+        actions:
+            go_to_Get_Record_Details: @utils.transition to @subagent.Get_Record_Details
+
+subagent Get_Record_Details:
+    label: "Get Record Details"
+    description: |
+
+        Get Record Details
+    reasoning:
+        instructions: ->
+            | If user request for account or opportunities with account name then call this action {!@actions.Get_Account_and_Opportunity_Details}
+        actions:
+            Get_Account_and_Opportunity_Details: @actions.Get_Account_and_Opportunity_Details
+                with accountName = ...
+
+
+    actions:
+        Get_Account_and_Opportunity_Details:
+            label: "Get Account and Opportunity Details"
+            description: |
+        
+                Get Account and Opportunity Details
+            target: "flow://Display_the_Contact_and_Opportunity_Records_associated_to_Account"
+            inputs:
+                accountName: string
+                    label: "accountName"
+                    is_required: False
+                    complex_data_type_name: "lightning__textType"
+            outputs:
+                OpportunityCollectionList: list[object]
+                    label: "OpportunityCollectionList"
+                    complex_data_type_name: "lightning__recordInfoType"
+                    is_displayable: False
+                    filter_from_agent: False
+                contactList: list[object]
+                    label: "contactList"
+                    complex_data_type_name: "lightning__recordInfoType"
+                    is_displayable: False
+                    filter_from_agent: False

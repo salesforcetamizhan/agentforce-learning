@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Audio Player" icon-name="utility:play">
+        <div class="slds-p-around_medium">
+
+            <template if:true={audioUrl}>
+                <audio controls style="width:100%;">
+                    <source src={audioUrl} type={mimeType} />
+                    Your browser does not support the audio element.
+                </audio>
+            </template>
+
+            <template if:false={audioUrl}>
+                <div class="slds-text-color_error">
+                    No audio available.
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

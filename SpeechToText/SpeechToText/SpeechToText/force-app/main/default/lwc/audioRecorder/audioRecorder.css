@@ -1,0 +1,33 @@
+.record-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #0176d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .25s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,.2);
+}
+
+.record-btn:hover {
+    transform: scale(1.08);
+}
+
+.record-btn.recording {
+    background: #ba0517;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(186,5,23,.6);
+    }
+    70% {
+        box-shadow: 0 0 0 14px rgba(186,5,23,0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(186,5,23,0);
+    }
+}
