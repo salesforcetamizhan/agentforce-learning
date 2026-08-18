@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>1sm8hgkfzPnH64CwYokPtkkTt5+T6rThfGc/MMJv2xU=_2</activeVersionIdentifier>
+    <developerName>AgentScript_TestGenerator_CSV</developerName>
+    <masterLabel>AgentScript_TestGenerator_CSV</masterLabel>
+    <overridable>false</overridable>
+    <templateVersions>
+        <content>You are a Salesforce Agentforce QA Engineer.
+
+Your task is to create a Testing Center compatible CSV from the provided Agent Script.
+
+AGENT SCRIPT
+-------------
+{!$Input:AgentScript}
+
+Analyze the script and identify:
+- User intents
+- Happy path scenarios
+- Negative scenarios
+- Ambiguous requests
+- Edge cases
+- Validation and escalation flows
+
+Generate 25 high-quality test cases.
+
+Return ONLY raw CSV.
+
+Header:
+Test Case ID,User Input,Expected Intent,Expected Response,Category,Priority
+
+Rules:
+- IDs: TC001–TC025
+- Category: Positive, Negative, Ambiguous, Edge
+- Priority: High, Medium, Low
+- Expected Response must be a single concise sentence.
+- Escape commas with double quotes.
+- No markdown.
+- No explanations.
+- No code fences.
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>AgentScript</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>AgentScript</masterLabel>
+            <referenceName>Input:AgentScript</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultGPT5Mini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>1sm8hgkfzPnH64CwYokPtkkTt5+T6rThfGc/MMJv2xU=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are an expert Salesforce Agentforce QA engineer.
+
+Analyze the Agent Script provided below and generate comprehensive test cases that can be uploaded to Agentforce Testing Center.
+
+AGENT SCRIPT
+============
+{!$Input:AgentScript}
+============
+
+Generate test cases using EXACTLY these four fields:
+
+1. Utterance
+2. Expected Subagent
+3. Expected Actions
+4. Expected Response
+
+Rules:
+
+- Utterance:
+ - Create realistic user questions or requests.
+ - Include positive, negative, ambiguous, boundary, and alternative phrasings.
+ - The utterance must be something a real user could say to the agent.
+
+- Expected Subagent:
+ - Must be the API name of the subagent from the Agent Script.
+ - Do NOT use the subagent label.
+ - Identify the subagent that should handle the utterance.
+
+- Expected Actions:
+ - Must contain the API names of the actions that should execute.
+ - Include ALL expected actions required to fulfill the utterance.
+ - Preserve the execution order.
+ - Return as an array of strings.
+
+- Expected Response:
+ - Describe what the agent response should contain.
+ - Do not generate the actual response.
+ - Keep it concise and testable.
+
+Generate between 15 and 30 test cases depending on the complexity of the Agent Script.
+
+IMPORTANT:
+Return ONLY valid JSON.
+Do not return Markdown.
+Do not return CSV.
+Do not return explanations.
+
+JSON format:
+
+[
+ {
+  &quot;utterance&quot;: &quot;Summarize account Acme&quot;,
+  &quot;expectedSubagent&quot;: &quot;OOTBSingleRecordSummary&quot;,
+  &quot;expectedActions&quot;: [
+   &quot;IdentifyRecordByName&quot;,
+   &quot;SummarizeRecord&quot;
+  ],
+  &quot;expectedResponse&quot;: &quot;Summary of Account details are shown&quot;
+ }
+]
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>AgentScript</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>AgentScript</masterLabel>
+            <referenceName>Input:AgentScript</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultGPT5Mini</primaryModel>
+        <status>Published</status>
+        <templateFormat>FormulaExpression</templateFormat>
+        <versionIdentifier>1sm8hgkfzPnH64CwYokPtkkTt5+T6rThfGc/MMJv2xU=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,0 +1,44 @@
+.agent-script-container {
+    width: 100%;
+}
+
+.agent-script-container lightning-textarea {
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.clear-button {
+    margin-left: 4px;
+}
+
+.download-button {
+    margin-left: auto;
+}
+.code-editor {
+    width: 100%;
+    min-height: 400px;
+    resize: vertical;
+    box-sizing: border-box;
+
+    padding: 1rem;
+
+    font-family:
+        'Courier New',
+        Courier,
+        monospace;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    border: 1px solid #c9c9c9;
+    border-radius: 0.25rem;
+
+    background: #fafafa;
+
+    tab-size: 4;
+}

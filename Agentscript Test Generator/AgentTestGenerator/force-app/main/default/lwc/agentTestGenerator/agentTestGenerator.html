@@ -1,0 +1,87 @@
+<template>
+
+    <lightning-card title="Agentforce Test Generator">
+
+        <div class="slds-p-around_medium">
+
+          <div class="section">
+
+    <h2 class="section-title">
+        Agent Script
+    </h2>
+
+    <textarea
+        class="code-editor"
+        value={agentScript}
+        onchange={handleChange}
+        placeholder="Paste the complete Agent Script here..."
+        spellcheck="false">
+    </textarea>
+
+</div>
+
+           <div class="button-container slds-m-top_medium">
+
+                <lightning-button
+                    variant="brand"
+                    label="Generate Test Cases"
+                    icon-name="utility:magicwand"
+                    onclick={generate}
+                    disabled={isLoading}>
+                </lightning-button>
+
+                <lightning-button
+                    class="clear-button"
+                    variant="neutral"
+                    label="Clear"
+                    icon-name="utility:clear"
+                    onclick={clearAll}
+                    disabled={isLoading}>
+                </lightning-button>
+
+                <template if:true={rows.length}>
+
+                    <lightning-button
+                        class="download-button"
+                        variant="success"
+                        label="Download CSV"
+                        icon-name="utility:download"
+                        onclick={downloadCsv}>
+                    </lightning-button>
+
+                </template>
+
+            </div>
+
+        </div>
+
+        <template if:true={isLoading}>
+
+            <lightning-spinner
+                alternative-text="Generating test cases...">
+            </lightning-spinner>
+
+        </template>
+
+        <template if:true={rows.length}>
+
+            <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+
+                <div class="slds-text-heading_small slds-m-bottom_small">
+                    Generated Test Cases ({rows.length})
+                </div>
+
+                <lightning-datatable
+                    key-field="id"
+                    data={rows}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+
+</template>
