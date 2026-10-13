@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<McpServerDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>CaseRetriever</description>
+    <masterLabel>CaseRetriever</masterLabel>
+        <resources>
+        <description>Renders the case details as a card.</description>
+        <resourceName>caseStatusWidget</resourceName>
+        <resourceTitle>Case Status Widget</resourceTitle>
+        <resourceUri>ui://widget/lightningType/c__caseStatusResult</resourceUri>
+        </resources>
+    <tools>
+        <apiDefinition>
+            <apiIdentifier>aa:apex-CaseStatusRetriever</apiIdentifier>
+            <apiSource>API_CATALOG</apiSource>
+            <operation>CaseStatusRetriever</operation>
+        </apiDefinition>
+        <descriptionOverride>Retrieve Salesforce Cases based on their status, such as New, Working, or Closed.</descriptionOverride>
+        <destructive>false</destructive>
+        <idempotent>false</idempotent>
+        <openWorld>false</openWorld>
+        <readOnly>false</readOnly>
+        <returnDirect>false</returnDirect>
+        <toolName>CaseStatusRetrieverapex_CaseStatusRetriever</toolName>
+        <toolTitle>CaseStatusRetriever</toolTitle>
+         <uiResource>caseStatusWidget</uiResource>
+    </tools>
+</McpServerDefinition>

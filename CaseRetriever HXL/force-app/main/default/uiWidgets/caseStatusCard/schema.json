@@ -1,0 +1,32 @@
+{
+    "title": "Case Status Widget",
+    "description": "Displays Case details",
+    "type": "object",
+    "properties": {
+        "attributes": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+                "caseNumber": {
+                    "title": "Case Number",
+                    "description": "Case number, formatted as plain text (no decimal formatting)",
+                    "lightning:type": "lightning__textType"
+                },
+                "subject": {
+                    "title": "Subject",
+                    "description": "Case subject",
+                    "lightning:type": "lightning__textType"
+                },
+                "priority": {
+                    "title": "Priority",
+                    "description": "Current priority of the case",
+                    "lightning:type": "lightning__textType"
+                },
+                "status": {
+                    "title": "Status",
+                    "description": "Current status of the order",
+                    "lightning:type": "lightning__textType"
+                }
+            }
+        }
+    }
+}

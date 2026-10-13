@@ -1,0 +1,15 @@
+{
+    "renderer": {
+        "componentOverrides": {
+            "$": {
+                "definition": "@widget/c/caseStatusCard",
+                "attributes": {
+                    "caseNumber": "{!$attrs.outputValues.caseNumber}",
+                    "subject": "{!$attrs.outputValues.subject}",
+                    "priority": "{!$attrs.outputValues.priority}",
+                    "status": "{!$attrs.outputValues.status}"
+                }
+            }
+        }
+    }
+}

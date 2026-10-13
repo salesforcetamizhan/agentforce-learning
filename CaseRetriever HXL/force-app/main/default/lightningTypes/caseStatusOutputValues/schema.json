@@ -1,0 +1,65 @@
+{
+    "title": "Case Status Output Values",
+    "description": "Payload fields from the CaseStatus response",
+    "type": "object",
+    "lightning:type": "lightning__objectType",
+    "lightning:tags": [
+        "mcp"
+    ],
+    "unevaluatedProperties": false,
+    "properties": {
+        "caseNumber": {
+            "title": "Case Number",
+            "description": "Case number",
+            "lightning:type": "lightning__numberType"
+        },
+        "subject": {
+            "title": "Subject",
+            "description": "Case subject",
+            "lightning:type": "lightning__textType"
+        },
+        "priority": {
+            "title": "Priority",
+            "description": "Current priority of the case",
+            "lightning:type": "lightning__textType"
+        },
+        "status": {
+            "title": "Status",
+            "description": "Current status of the case",
+            "lightning:type": "lightning__textType"
+        },
+        "cases": {
+            "title": "Cases",
+            "description": "Multiple case records",
+            "type": "array",
+            "lightning:type": "lightning__arrayType",
+            "items": {
+                "type": "object",
+                "lightning:type": "lightning__objectType",
+                "properties": {
+                    "caseNumber": {
+                        "title": "Case Number",
+                        "description": "Case number",
+                        "lightning:type": "lightning__numberType"
+                    },
+                    "subject": {
+                        "title": "Subject",
+                        "description": "Case subject",
+                        "lightning:type": "lightning__textType"
+                    },
+                    "priority": {
+                        "title": "Priority",
+                        "description": "Current priority of the case",
+                        "lightning:type": "lightning__textType"
+                    },
+                    "status": {
+                        "title": "Status",
+                        "description": "Current status of the case",
+                        "lightning:type": "lightning__textType"
+                    }
+                },
+                "unevaluatedProperties": false
+            }
+        }
+    }
+}

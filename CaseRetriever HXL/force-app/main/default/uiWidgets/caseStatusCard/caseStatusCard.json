@@ -1,0 +1,100 @@
+{
+    "type": "lightning__agentforceWidget",
+    "contentBody": {
+        "widgetBody": {
+            "definition": "tile/widget",
+            "children": [
+                {
+                    "definition": "tile/column",
+                    "attributes": {
+                        "gap": "md"
+                    },
+                    "children": [
+                        {
+                            "definition": "tile/container",
+                            "children": [
+                                {
+                                    "definition": "tile/text",
+                                    "attributes": {
+                                        "text": "Case Number: #{!$attrs.caseNumber}",
+                                        "variant": "h2",
+                                        "weight": "semibold"
+                                    }
+                                },
+                                {
+                                    "definition": "tile/row",
+                                    "attributes": {
+                                        "gap": "sm"
+                                    },
+                                    "children": [
+                                        {
+                                            "definition": "tile/text",
+                                            "attributes": {
+                                                "text": "Subject",
+                                                "variant": "body",
+                                                "weight": "semibold"
+                                            }
+                                        },
+                                        {
+                                            "definition": "tile/text",
+                                            "attributes": {
+                                                "text": "{!$attrs.subject}",
+                                                "variant": "body"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "definition": "tile/row",
+                                    "attributes": {
+                                        "gap": "sm"
+                                    },
+                                    "children": [
+                                        {
+                                            "definition": "tile/text",
+                                            "attributes": {
+                                                "text": "Priority",
+                                                "variant": "body",
+                                                "weight": "semibold"
+                                            }
+                                        },
+                                        {
+                                            "definition": "tile/text",
+                                            "attributes": {
+                                                "text": "{!$attrs.priority}",
+                                                "variant": "body"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "definition": "tile/row",
+                                    "attributes": {
+                                        "gap": "sm"
+                                    },
+                                    "children": [
+                                        {
+                                            "definition": "tile/text",
+                                            "attributes": {
+                                                "text": "Status",
+                                                "variant": "body",
+                                                "weight": "semibold"
+                                            }
+                                        },
+                                        {
+                                            "definition": "tile/text",
+                                            "attributes": {
+                                                "text": "{!$attrs.status}",
+                                                "variant": "body"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
